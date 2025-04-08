@@ -11,9 +11,9 @@ const HeroSection = ({
   onDonateClick = () => (window.location.href = "#get-involved"),
 }: HeroSectionProps) => {
   const slideImages = [
-    "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=1200&q=80",
-    "https://images.unsplash.com/photo-1542810634-71277d95dcbb?w=1200&q=80",
-    "https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?w=1200&q=80",
+    "../src/assets/images/group-photo.jpg",
+    "../src/assets/images/group-photo.jpg",
+    "../src/assets/images/group-photo.jpg",
   ];
 
   return (
