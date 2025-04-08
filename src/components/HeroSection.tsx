@@ -15,7 +15,7 @@ const HeroSection = ({
     "../src/assets/images/group-photo.jpg",
     "../src/assets/images/group-photo.jpg",
   ];
-
+  // Placeholder for additional logic or functionality
   return (
     <div className="relative h-[700px] w-full overflow-hidden bg-slate-900">
       {/* Background slideshow */}

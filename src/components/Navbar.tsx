@@ -44,7 +44,7 @@ const Navbar = () => {
               to="/get-involved"
               className="text-gray-700 hover:text-primary flex items-center"
             >
-              <Heart className="h-4 w-4 mr-1" />
+              {/* <Heart className="h-4 w-4 mr-1" /> */}
               <span>Get Involved</span>
             </Link>
             <Link
