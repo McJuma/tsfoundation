@@ -8,6 +8,7 @@ import {
   Twitter,
   Instagram,
   Linkedin,
+  // TikTok,
 } from "lucide-react";
 import { Separator } from "./ui/separator";
 
@@ -102,23 +103,28 @@ const Footer = () => {
             <h3 className="text-lg font-semibold mb-4">Follow Us</h3>
             <div className="flex space-x-4">
               <a
-                href="https://facebook.com"
+                style={{ backgroundColor: "blue", color: "white", borderRadius: "50%" }}
+                href="https://www.facebook.com/share/19LthXk8b6/?mibextid=wwXIfr"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="hover:text-destructive transition-colors"
               >
                 <Facebook className="h-6 w-6" />
               </a>
-              <a
-                href="https://twitter.com"
+                <a
+                href="https://www.tiktok.com/@tashasashafoundation23?_t=ZM-8vCaa2AgbyB&_r=1"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="hover:text-destructive transition-colors"
-              >
-                <Twitter className="h-6 w-6" />
-              </a>
+                >
+                <img
+                  src="../src/assets/images/Tiktoklogo.png"
+                  alt="TikTok"
+                  className="h-6 w-6 rounded-full"
+                />
+                </a>
               <a
-                href="https://instagram.com"
+                href="https://www.instagram.com/tashasashafoundation?igsh=MTBmdXluNXMycTRocA%3D%3D&utm_source=qr"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="hover:text-destructive transition-colors"
