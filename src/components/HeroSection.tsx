@@ -1,0 +1,62 @@
+import React from "react";
+import { Button } from "@/components/ui/button";
+import { motion } from "framer-motion";
+
+interface HeroSectionProps {
+  onDonateClick?: () => void;
+}
+
+const HeroSection = ({
+  onDonateClick = () => (window.location.href = "#get-involved"),
+}: HeroSectionProps) => {
+  return (
+    <div className="relative h-[700px] w-full overflow-hidden bg-slate-900">
+      {/* Background image with overlay */}
+      <div
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+        style={{
+          backgroundImage:
+            "url(https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=1200&q=80)",
+          filter: "brightness(0.4)",
+        }}
+      />
+
+      {/* Content container */}
+      <div className="relative z-10 flex h-full w-full flex-col items-center justify-center px-4 text-center text-white">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className="max-w-4xl"
+        >
+          {/* Foundation name */}
+          <h1 className="mb-2 text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl">
+            TashaSasha<span className="text-primary">Foundation</span>
+          </h1>
+
+          {/* Founding date */}
+          <p className="mb-6 text-sm font-medium uppercase tracking-wider text-primary-foreground/80">
+            Established August 23, 2023
+          </p>
+
+          {/* Mission statement */}
+          <p className="mb-8 text-xl font-light leading-relaxed md:text-2xl">
+            Providing love, care, and a nurturing environment for orphans. Our
+            mission is to create a place where every child feels at home.
+          </p>
+
+          {/* Call to action button */}
+          <Button
+            size="lg"
+            onClick={onDonateClick}
+            className="rounded-full px-8 py-6 text-lg font-semibold transition-all hover:scale-105"
+          >
+            Donate Now
+          </Button>
+        </motion.div>
+      </div>
+    </div>
+  );
+};
+
+export default HeroSection;
