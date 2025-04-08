@@ -24,6 +24,7 @@ const Footer = () => {
               {/* <Heart className="h-6 w-6 text-destructive mr-2" /> */}
               <p><img src="../src/assets/images/logo.png" alt="Logo" className="h-20 w-20 mr-2" /></p>
               <p className="text-xl font-bold">TashaSashaFoundation</p>
+              <link href="#">Donate Now</link>
             </div>
             <p className="text-sm mb-4">
               TashaSashaFoundation is a non-profit organization dedicated to improving lives through education, healthcare, and community development programs.
