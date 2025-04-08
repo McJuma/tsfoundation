@@ -20,7 +20,7 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* About */}
           <div>
-            <div className="flex items-center mb-4">
+            <div className="flex mb-4">
               {/* <Heart className="h-6 w-6 text-destructive mr-2" /> */}
               <p><img src="../src/assets/images/logo.png" alt="Logo" className="h-20 w-20 mr-2" /></p>
               <h3 className="text-xl font-bold">TashaSashaFoundation</h3>
