@@ -22,7 +22,7 @@ const Footer = () => {
           <div>
             <div className="flex items-center mb-4">
               {/* <Heart className="h-6 w-6 text-destructive mr-2" /> */}
-              <img src="../src/assets/images/logo.png" alt="Logo" className="h-6 w-6 text-destructive mr-2" /><br />
+              <p><img src="../src/assets/images/logo.png" alt="Logo" className="h-20 w-20 mr-2" /></p>
               <h3 className="text-xl font-bold">TashaSashaFoundation</h3>
             </div>
             <p className="text-sm mb-4">
@@ -84,11 +84,11 @@ const Footer = () => {
               <li className="flex items-start">
                 <MapPin className="h-4 w-4 mr-2 mt-1" />
                 <span className="text-sm">
-                  123 Charity Lane
+                  Mombasa Road, Imara Daima
                   <br />
-                  Compassion City, CC 12345
+                  Nairobi City
                   <br />
-                  United States
+                  kenya
                 </span>
               </li>
             </ul>
