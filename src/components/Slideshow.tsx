@@ -11,9 +11,9 @@ interface SlideProps {
 
 const Slideshow = ({
   images = [
-    "src/assets/images/group-photo.jpg",
-    "src/assets/images/group-photo.jpg",
-    "src/assets/images/group-photo.jpg",
+    "../src/assets/images/group-photo.jpg",
+    "../src/assets/images/group-photo.jpg",
+    "../src/assets/images/group-photo.jpg",
   ],
   interval = 5000,
   autoPlay = true,
