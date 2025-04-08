@@ -1,6 +1,7 @@
 import React from "react";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
+import Slideshow from "./Slideshow";
 
 interface HeroSectionProps {
   onDonateClick?: () => void;
@@ -9,17 +10,16 @@ interface HeroSectionProps {
 const HeroSection = ({
   onDonateClick = () => (window.location.href = "#get-involved"),
 }: HeroSectionProps) => {
+  const slideImages = [
+    "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=1200&q=80",
+    "https://images.unsplash.com/photo-1542810634-71277d95dcbb?w=1200&q=80",
+    "https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?w=1200&q=80",
+  ];
+
   return (
     <div className="relative h-[700px] w-full overflow-hidden bg-slate-900">
-      {/* Background image with overlay */}
-      <div
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-        style={{
-          backgroundImage:
-            "url(https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=1200&q=80)",
-          filter: "brightness(0.4)",
-        }}
-      />
+      {/* Background slideshow */}
+      <Slideshow images={slideImages} interval={6000} showControls={true} />
 
       {/* Content container */}
       <div className="relative z-10 flex h-full w-full flex-col items-center justify-center px-4 text-center text-white">
