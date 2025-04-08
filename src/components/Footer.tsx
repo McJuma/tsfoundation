@@ -21,12 +21,12 @@ const Footer = () => {
           {/* About */}
           <div>
             <div className="flex items-center mb-4">
-              <Heart className="h-6 w-6 text-destructive mr-2" />
+              {/* <Heart className="h-6 w-6 text-destructive mr-2" /> */}
+              <img src="../src/assets/images/logo.png" alt="Logo" className="h-6 w-6 text-destructive mr-2" /><br />
               <h3 className="text-xl font-bold">TashaSashaFoundation</h3>
             </div>
             <p className="text-sm mb-4">
-              Established in August 23, 2023, we are dedicated to supporting
-              orphans and establishing a loving children's home environment.
+              TashaSashaFoundation is a non-profit organization dedicated to improving lives through education, healthcare, and community development programs.
             </p>
           </div>
 
