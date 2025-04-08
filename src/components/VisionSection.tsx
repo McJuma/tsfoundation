@@ -62,28 +62,12 @@ const VisionSection = ({
             viewport={{ once: true }}
           >
             <h3 className="text-2xl font-semibold mb-6 text-gray-800">
-              Our Goals
+              Our Goal
             </h3>
             <Card>
               <CardContent className="pt-6">
                 <ul className="space-y-4">
-                  {goals.map((goal, index) => (
-                    <motion.li
-                      key={index}
-                      initial={{ opacity: 0, y: 10 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.5, delay: 0.2 + index * 0.1 }}
-                      viewport={{ once: true }}
-                      className="flex items-start"
-                    >
-                      <div className="flex-shrink-0 w-6 h-6 rounded-full bg-primary/20 flex items-center justify-center mr-3 mt-0.5">
-                        <span className="text-primary font-medium text-sm">
-                          {index + 1}
-                        </span>
-                      </div>
-                      <span className="text-gray-700">{goal}</span>
-                    </motion.li>
-                  ))}
+                  Our way of charity is not all about giving, it's about making a meaningful difference in the lives of those in need, showing them that even in the midst of their situations, the Lord is present, fostering a sense of community and inspiring others to join in the effort to raise a generation that not only knows God but understand His will to humankind ❤
                 </ul>
               </CardContent>
             </Card>
