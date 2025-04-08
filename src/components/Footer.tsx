@@ -29,7 +29,7 @@ const Footer = () => {
               TashaSashaFoundation is a non-profit organization dedicated to improving lives through education, healthcare, and community development programs.
             </p>
             <p>
-              <a href="#">Donate Now</a>
+              <a href="#" className="bg-blue-500 rounded-md hover:bg-white text-white px-4 py-2">Donate Now</a>
             </p>
           </div>
 
