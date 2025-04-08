@@ -16,7 +16,8 @@ const Navbar = () => {
         <div className="flex justify-between h-16 items-center">
           <div className="flex items-center">
             <Link to="/" className="flex items-center">
-              <Heart className="h-8 w-8 text-destructive mr-2" />
+              {/* <Heart className="h-8 w-8 text-destructive mr-2" /> */}
+              <img src="../src/assets/images/logo.png" alt="Logo" className="h-8 w-8 text-destructive mr-2"/>
               <span className="font-bold text-xl text-primary">
                 TashaSashaFoundation
               </span>
