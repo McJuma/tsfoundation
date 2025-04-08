@@ -12,14 +12,14 @@ interface VisionSectionProps {
 const VisionSection = ({
   title = "Our Vision",
   description = "At TashaSashaFoundation, our ultimate goal is to establish a children's home in the near future. We believe that every child deserves a loving and nurturing environment to thrive in, and we want to be the foundation that provides just that.",
-  goals = [
-    "Establish a safe and loving children's home",
-    "Provide quality education for all children in our care",
-    "Ensure proper healthcare and nutrition",
-    "Offer emotional support and counseling",
-    "Prepare children for independent living through life skills training",
-  ],
-  imageUrl = "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=800&q=80",
+  // goals = [
+  //   "Establish a safe and loving children's home",
+  //   "Provide quality education for all children in our care",
+  //   "Ensure proper healthcare and nutrition",
+  //   "Offer emotional support and counseling",
+  //   "Prepare children for independent living through life skills training",
+  // ],
+  imageUrl = "src/assets/images/kids.jpg",
 }: VisionSectionProps) => {
   return (
     <section className="py-16 px-4 md:px-8 bg-slate-50">
