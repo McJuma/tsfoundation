@@ -54,13 +54,13 @@ const HeroSection = ({
           </p>
 
           {/* Call to action button */}
-          <Button
+            <Button
             size="lg"
-            onClick={onDonateClick}
+            onClick={() => (window.location.href = "/donate")}
             className="rounded-full px-8 py-6 text-lg font-semibold transition-all hover:scale-105"
-          >
+            >
             Donate Now
-          </Button>
+            </Button>
         </motion.div>
       </div>
     </div>
