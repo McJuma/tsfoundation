@@ -1,6 +1,7 @@
 import { Routes, Route, useRoutes } from "react-router-dom";
 import routes from "tempo-routes";
 import Home from "./components/home";
+import DonatePage from "./components/DonatePage";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 
@@ -13,6 +14,8 @@ function App() {
         {import.meta.env.VITE_TEMPO && useRoutes(routes)}
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/donate" element={<DonatePage />} />
+          {import.meta.env.VITE_TEMPO && <Route path="/tempobook/*" />}
         </Routes>
       </main>
       <Footer />
