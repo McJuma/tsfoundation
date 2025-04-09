@@ -17,7 +17,11 @@ const Navbar = () => {
           <div className="flex items-center">
             <Link to="/" className="flex items-center">
               {/* <Heart className="h-8 w-8 text-destructive mr-2" /> */}
-              <img src="../src/assets/images/logo.png" alt="Logo" className="h-8 w-8 text-destructive mr-2"/>
+              <img
+                src="../src/assets/images/logo.png"
+                alt="Logo"
+                className="h-8 w-8 text-destructive mr-2"
+              />
               <span className="font-bold text-xl text-primary">
                 TashaSashaFoundation
               </span>
@@ -54,9 +58,11 @@ const Navbar = () => {
               <Phone className="h-4 w-4 mr-1" />
               <span>Contact</span>
             </Link>
-            <Button variant="destructive" size="sm" className="ml-4">
-              Donate Now
-            </Button>
+            <Link to="/donate">
+              <Button variant="destructive" size="sm" className="ml-4">
+                Donate Now
+              </Button>
+            </Link>
           </div>
 
           {/* Mobile menu button */}
@@ -108,9 +114,11 @@ const Navbar = () => {
               <Phone className="h-4 w-4 mr-2" />
               <span>Contact</span>
             </Link>
-            <Button variant="destructive" size="sm" className="mt-3 w-full">
-              Donate Now
-            </Button>
+            <Link to="/donate">
+              <Button variant="destructive" size="sm" className="mt-3 w-full">
+                Donate Now
+              </Button>
+            </Link>
           </div>
         </div>
       )}

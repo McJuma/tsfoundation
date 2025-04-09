@@ -12,6 +12,8 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Separator } from "@/components/ui/separator";
+import { BarChart, DollarSign, PieChart, FileText } from "lucide-react";
 
 const DonatePage = () => {
   const [paymentMethod, setPaymentMethod] = useState<string>("mpesa");
@@ -38,7 +40,7 @@ const DonatePage = () => {
           </p>
         </div>
 
-        <div className="mx-auto max-w-md">
+        <div className="mx-auto max-w-md mb-16">
           <Card>
             <CardHeader>
               <CardTitle>Make a Donation</CardTitle>
@@ -125,6 +127,126 @@ const DonatePage = () => {
               </p>
             </CardFooter>
           </Card>
+        </div>
+
+        {/* Financial Transparency Section */}
+        <div className="mt-16 mb-12">
+          <div className="text-center mb-10">
+            <h2 className="text-3xl font-bold text-primary mb-4">
+              Financial Transparency
+            </h2>
+            <p className="mx-auto max-w-2xl text-lg text-gray-600">
+              We believe in complete transparency with our donors. Here's how
+              your contributions are making a difference.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
+            <Card className="bg-white">
+              <CardHeader className="pb-2">
+                <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mb-2">
+                  <DollarSign className="h-6 w-6 text-primary" />
+                </div>
+                <CardTitle className="text-xl">85%</CardTitle>
+                <CardDescription>Direct Program Support</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <p className="text-sm text-gray-500">
+                  85% of all donations go directly to supporting our children's
+                  home and educational programs.
+                </p>
+              </CardContent>
+            </Card>
+
+            <Card className="bg-white">
+              <CardHeader className="pb-2">
+                <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mb-2">
+                  <BarChart className="h-6 w-6 text-primary" />
+                </div>
+                <CardTitle className="text-xl">10%</CardTitle>
+                <CardDescription>Administrative Costs</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <p className="text-sm text-gray-500">
+                  We keep our administrative costs low at just 10% to maximize
+                  the impact of your donations.
+                </p>
+              </CardContent>
+            </Card>
+
+            <Card className="bg-white">
+              <CardHeader className="pb-2">
+                <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mb-2">
+                  <PieChart className="h-6 w-6 text-primary" />
+                </div>
+                <CardTitle className="text-xl">5%</CardTitle>
+                <CardDescription>Fundraising</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <p className="text-sm text-gray-500">
+                  Only 5% is used for fundraising efforts to help us reach more
+                  supporters and grow our impact.
+                </p>
+              </CardContent>
+            </Card>
+
+            <Card className="bg-white">
+              <CardHeader className="pb-2">
+                <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mb-2">
+                  <FileText className="h-6 w-6 text-primary" />
+                </div>
+                <CardTitle className="text-xl">100%</CardTitle>
+                <CardDescription>Accountability</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <p className="text-sm text-gray-500">
+                  We provide detailed annual reports and are committed to full
+                  financial transparency.
+                </p>
+              </CardContent>
+            </Card>
+          </div>
+
+          <div className="bg-white rounded-lg p-6 shadow-sm">
+            <h3 className="text-xl font-semibold mb-4">
+              Our Financial Reports
+            </h3>
+            <p className="text-gray-600 mb-6">
+              We publish our financial reports annually to maintain transparency
+              with our donors and supporters. These reports provide detailed
+              information about how funds are allocated and used to support our
+              mission.
+            </p>
+            <div className="space-y-4">
+              <div className="flex items-center justify-between p-3 border rounded-md hover:bg-slate-50 transition-colors">
+                <div className="flex items-center">
+                  <FileText className="h-5 w-5 text-primary mr-3" />
+                  <span>Annual Financial Report 2023</span>
+                </div>
+                <Button variant="outline" size="sm">
+                  Download
+                </Button>
+              </div>
+              <div className="flex items-center justify-between p-3 border rounded-md hover:bg-slate-50 transition-colors">
+                <div className="flex items-center">
+                  <FileText className="h-5 w-5 text-primary mr-3" />
+                  <span>Impact Assessment Report 2023</span>
+                </div>
+                <Button variant="outline" size="sm">
+                  Download
+                </Button>
+              </div>
+              <div className="flex items-center justify-between p-3 border rounded-md hover:bg-slate-50 transition-colors">
+                <div className="flex items-center">
+                  <FileText className="h-5 w-5 text-primary mr-3" />
+                  <span>Quarterly Update - Q1 2024</span>
+                </div>
+                <Button variant="outline" size="sm">
+                  Download
+                </Button>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
