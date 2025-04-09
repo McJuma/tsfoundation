@@ -11,20 +11,20 @@ const HeroSection = ({
   onDonateClick = () => (window.location.href = "/donate"),
 }: HeroSectionProps) => {
   const slideImages = [
-    "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=1200&q=80",
-    "https://images.unsplash.com/photo-1542810634-71277d95dcbb?w=1200&q=80",
-    "https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?w=1200&q=80",
+    "../src/assets/images/group-photo.jpg",
+    "../src/assets/images/group-photo.jpg",
+    "../src/assets/images/group-photo.jpg",
   ];
 
   return (
     <div className="relative h-[700px] w-full overflow-hidden bg-slate-900">
       {/* Background slideshow */}
-      <Slideshow
+      {/* <Slideshow
         images={slideImages}
         interval={6000}
         showControls={true}
         className="absolute inset-0"
-      />
+      /> */}
 
       {/* Overlay */}
       <div className="absolute inset-0 bg-black/50"></div>
