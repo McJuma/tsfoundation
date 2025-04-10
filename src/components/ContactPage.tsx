@@ -178,6 +178,7 @@ const ContactPage = () => {
               <Button
                 variant="outline"
                 className="bg-white text-primary hover:bg-white/90"
+                onClick={() => window.location.href = "/get"}
               >
                 Learn More
               </Button>

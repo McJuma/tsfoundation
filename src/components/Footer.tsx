@@ -35,7 +35,7 @@ const Footer = () => {
           </div>
 
           {/* Quick Links */}
-          <div>
+          <div className="text-center">
             <h3 className="text-lg font-semibold mb-4">Quick Links</h3>
             <ul className="space-y-2">
               <li>
@@ -92,7 +92,7 @@ const Footer = () => {
                   <br />
                   Nairobi City
                   <br />
-                  kenya
+                  Kenya
                 </span>
               </li>
             </ul>
@@ -131,14 +131,14 @@ const Footer = () => {
               >
                 <Instagram className="h-6 w-6" />
               </a>
-              <a
+              {/* <a
                 href="https://linkedin.com"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="hover:text-destructive transition-colors"
               >
                 <Linkedin className="h-6 w-6" />
-              </a>
+              </a> */}
             </div>
             <div className="mt-6">
               <h4 className="text-sm font-semibold mb-2">
@@ -162,7 +162,7 @@ const Footer = () => {
 
         <div className="flex flex-col md:flex-row justify-between items-center">
           <p className="text-xs">
-            &copy; {currentYear} TashaSashaFoundation. All rights reserved.
+            &copy; 2023 TashaSashaFoundation. All rights reserved.
           </p>
           <div className="flex space-x-4 mt-4 md:mt-0">
             <Link to="/privacy-policy" className="text-xs hover:underline">
