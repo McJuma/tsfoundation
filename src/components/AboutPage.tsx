@@ -1,4 +1,6 @@
 import React from "react";
+import VisionSection from "./VisionSection";
+import MissionSection from "./MissionSection";
 import { Heart, Home, BookOpen } from "lucide-react";
 
 const AboutPage = () => {
@@ -21,43 +23,9 @@ const AboutPage = () => {
             for these children.
           </p>
         </div>
-
-        <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto mb-16">
-          <div className="bg-white p-6 rounded-lg shadow-md text-center">
-            <div className="flex justify-center mb-4">
-              <Heart className="h-12 w-12 text-destructive" />
-            </div>
-            <h3 className="text-xl font-semibold mb-2">Our Mission</h3>
-            <p className="text-gray-600">
-              To provide love, care, and support to orphaned children, ensuring
-              they have access to education, healthcare, and emotional support.
-            </p>
-          </div>
-
-          <div className="bg-white p-6 rounded-lg shadow-md text-center">
-            <div className="flex justify-center mb-4">
-              <Home className="h-12 w-12 text-primary" />
-            </div>
-            <h3 className="text-xl font-semibold mb-2">Our Goal</h3>
-            <p className="text-gray-600">
-              To establish a children's home that provides a loving and
-              nurturing environment where orphaned children can thrive and reach
-              their full potential.
-            </p>
-          </div>
-
-          <div className="bg-white p-6 rounded-lg shadow-md text-center">
-            <div className="flex justify-center mb-4">
-              <BookOpen className="h-12 w-12 text-amber-500" />
-            </div>
-            <h3 className="text-xl font-semibold mb-2">Our Values</h3>
-            <p className="text-gray-600">
-              Compassion, integrity, dedication, and the belief that every child
-              deserves a chance to grow in a supportive and loving environment.
-            </p>
-          </div>
-        </div>
-
+        <VisionSection />
+        <MissionSection />
+        
         <div className="bg-white p-8 rounded-lg shadow-md max-w-4xl mx-auto">
           <h2 className="text-2xl font-bold text-primary mb-4 text-center">
             Our Team
