@@ -33,8 +33,8 @@ const HeroSection = ({
           transition={{ duration: 0.8 }}
           className="max-w-3xl mx-auto"
         >
-          <h1 className="text-4xl md:text-6xl font-bold mb-6 drop-shadow-lg">
-            TashaSasha Foundation
+          <h1 className="text-5xl md:text-6xl font-bold mb-6 drop-shadow-lg">
+            <span style={{color: "red"}}>Tasha</span><span style={{color: "skyblue"}}>Sasha</span><span style={{color: "yellow"}}>Foundation</span>
           </h1>
           <p className="text-xl md:text-2xl mb-8 max-w-2xl mx-auto drop-shadow-md">
             Dedicated to providing love, care, and a future for orphaned
