@@ -23,7 +23,7 @@ const Slideshow = ({
   ],
   interval = 5000,
   autoPlay = true,
-  showControls = true,
+  showControls = false,
   className = "",
 }: SlideProps) => {
   const [currentSlide, setCurrentSlide] = useState(0);
