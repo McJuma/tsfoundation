@@ -61,6 +61,7 @@ const DonatePage = () => {
                       min="100"
                       placeholder="Enter amount in KES"
                       required
+                      disabled={paymentMethod === "paypal" || paymentMethod === "bank"}
                     />
                   </div>
                 </div>
@@ -106,13 +107,49 @@ const DonatePage = () => {
                         required
                       />
                     </div>
-                    <p className="mt-1 text-xs text-gray-500">
-                      Enter the phone number registered with M-Pesa
+                    <p className="mt-1 text-xs text-black-500">
+                      Enter the phone number registered with M-Pesa. You will receive a prompt on your phone to enter your M-Pesa PIN
                     </p>
                   </div>
                 )}
 
-                <Button type="submit" className="w-full">
+
+                {paymentMethod === "bank" && (
+                  <div className="mb-6">
+                    
+                    <label htmlFor="bank_details">Bank Details</label>
+                    <div className="mt-2">
+                      {/* show bank details when bank transfer is selected */}
+                      <p>
+                        Accont Name: TashaSashaFoundation
+                        <br />
+                        Account Number: 87648769884
+                        <br />
+                        Bank: Equity Bank
+                        <br />
+                        Branch: Imara Daima
+                      </p>
+                    </div>
+                  </div>
+                )}
+                
+
+                {paymentMethod === "paypal" && (
+                  <div className="mb-6">
+                    <label htmlFor="paypal_address">Paypal Address</label>
+                    <div className="mt-2">
+                      Send your donations to jumamark33@gmail.com
+                    </div>
+                  </div>
+                )
+
+                }
+
+                <Button
+                  type="submit"
+                  className="w-full"
+                  disabled={paymentMethod === "paypal" || paymentMethod === "bank"}
+                >
                   Complete Donation
                 </Button>
               </form>
