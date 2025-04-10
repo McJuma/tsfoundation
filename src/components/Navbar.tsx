@@ -18,7 +18,7 @@ const Navbar = () => {
             <Link to="/" className="flex items-center">
               {/* <Heart className="h-8 w-8 text-destructive mr-2" /> */}
               <img
-                src="src/assets/images/logo.png"
+                src="/src/assets/images/logo.png"
                 alt="Logo"
                 className="h-8 w-8 text-destructive mr-2"
               />

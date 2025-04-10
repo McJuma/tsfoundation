@@ -8,6 +8,7 @@ import {
   Twitter,
   Instagram,
   Linkedin,
+  // WhatsApp,
   // TikTok,
 } from "lucide-react";
 import { Separator } from "./ui/separator";
@@ -81,8 +82,15 @@ const Footer = () => {
               </li>
               <li className="flex items-center">
                 <Phone className="h-4 w-4 mr-2" />
-                <a href="tel:+1234567890" className="text-sm hover:underline">
-                  (123) 456-7890
+                <a href="tel:0727415161" className="text-sm hover:underline">
+                  Make a Call
+                </a>
+              </li>
+              <li className="flex items-center">
+                <img src="src/assets/images/wa_logo.png" alt="WhatsApp" className="h-4 w-4 mr-2"/>
+                <a href="https://wa.me/+254727415161"
+                  target="_blank" className="text-sm hover:underline">
+                  WhatsApp Us
                 </a>
               </li>
               <li className="flex items-start">
@@ -118,7 +126,7 @@ const Footer = () => {
                 className="hover:text-destructive transition-colors"
                 >
                 <img
-                  src="../src/assets/images/Tiktoklogo.png"
+                  src="/src/assets/images/Tiktoklogo.png"
                   alt="TikTok"
                   className="h-6 w-6 rounded-full"
                 />
