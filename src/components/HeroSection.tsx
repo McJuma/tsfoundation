@@ -42,7 +42,7 @@ const HeroSection = ({
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button
-              onClick={onDonateClick}
+              onClick={() => (window.location.href = "/donate")}
               size="lg"
               variant="destructive"
               className="text-lg px-8 py-6"
