@@ -38,7 +38,7 @@ const Navbar = () => {
               <span>Home</span>
             </Link>
             <Link
-              to="/vision"
+              to="/about"
               className="text-gray-700 hover:text-primary flex items-center"
             >
               <Users className="h-4 w-4 mr-1" />
@@ -94,11 +94,11 @@ const Navbar = () => {
               <span>Home</span>
             </Link>
             <Link
-              to="/vision"
+              to="/about"
               className="text-gray-700 hover:text-primary block px-3 py-2 rounded-md text-base font-medium flex items-center"
             >
               <Users className="h-4 w-4 mr-2" />
-              <span>Our Vision</span>
+              <span>About Us</span>
             </Link>
             <Link
               to="/get-involved"
