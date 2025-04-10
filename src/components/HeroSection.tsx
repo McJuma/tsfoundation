@@ -63,7 +63,7 @@ const HeroSection = ({
             </Button>&nbsp;
             {/* learn more button */}
             <Button className="rounded-full px-8 py-6 text-lg font-semibold transition-all hover:scale-105"
-              onClick={() => (window.location.href = "/src/components/AboutPage.tsx")}>
+              onClick={() => (window.location.href = "/about")}>
               Learn More
             </Button>
         </motion.div>
