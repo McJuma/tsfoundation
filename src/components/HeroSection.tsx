@@ -11,9 +11,9 @@ const HeroSection = ({
   onDonateClick = () => (window.location.href = "/donate"),
 }: HeroSectionProps) => {
   const slideImages = [
-    "../src/assets/images/group-photo.jpg",
-    "../src/assets/images/kids.jpg",
-    "../src/assets/images/foodaid.jpg",
+    "/src/assets/images/group-photo.jpg",
+    "/src/assets/images/kids.jpg",
+    "/src/assets/images/foodaid.jpg",
   ];
 
   const slideTexts = [
@@ -34,7 +34,9 @@ const HeroSection = ({
           className="max-w-3xl mx-auto"
         >
           <h1 className="text-5xl md:text-6xl font-bold mb-6 drop-shadow-lg">
-            <span style={{color: "red"}}>Tasha</span><span style={{color: "skyblue"}}>Sasha</span><span style={{color: "yellow"}}>Foundation</span>
+            <span style={{ color: "red" }}>Tasha</span>
+            <span style={{ color: "skyblue" }}>Sasha</span>
+            <span style={{ color: "yellow" }}>Foundation</span>
           </h1>
           <p className="text-xl md:text-2xl mb-8 max-w-2xl mx-auto drop-shadow-md">
             Dedicated to providing love, care, and a future for orphaned

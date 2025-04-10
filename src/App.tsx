@@ -4,6 +4,7 @@ import Home from "./components/home";
 import DonatePage from "./components/DonatePage";
 import ContactPage from "./components/ContactPage";
 import AboutPage from "./components/AboutPage";
+import WorkInProgress from "./components/WorkInProgress";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 
@@ -19,6 +20,7 @@ function App() {
           <Route path="/donate" element={<DonatePage />} />
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/about" element={<AboutPage />} />
+          <Route path="/work-in-action" element={<WorkInProgress />} />
           {import.meta.env.VITE_TEMPO && <Route path="/tempobook/*" />}
         </Routes>
       </main>

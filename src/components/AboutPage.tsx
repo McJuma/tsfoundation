@@ -25,7 +25,7 @@ const AboutPage = () => {
         </div>
         <VisionSection />
         <MissionSection />
-        
+
         <div className="bg-white p-8 rounded-lg shadow-md max-w-4xl mx-auto">
           <h2 className="text-2xl font-bold text-primary mb-4 text-center">
             Our Team
@@ -40,7 +40,7 @@ const AboutPage = () => {
 
           <div className="flex justify-center">
             <img
-              src="../src/assets/images/group-photo.jpg"
+              src="/src/assets/images/group-photo.jpg"
               alt="Team Photo"
               className="rounded-lg max-w-full h-auto shadow-md"
             />

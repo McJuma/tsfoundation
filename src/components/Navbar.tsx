@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { Button } from "./ui/button";
-import { Home, Heart, Users, Phone, Menu, X } from "lucide-react";
+import { Home, Heart, Users, Phone, Menu, X, Construction } from "lucide-react";
 import { useState } from "react";
 
 const Navbar = () => {
@@ -50,6 +50,13 @@ const Navbar = () => {
             >
               {/* <Heart className="h-4 w-4 mr-1" /> */}
               <span>Get Involved</span>
+            </Link>
+            <Link
+              to="/work-in-action"
+              className="text-gray-700 hover:text-primary flex items-center"
+            >
+              <Construction className="h-4 w-4 mr-1" />
+              <span>Work In Action</span>
             </Link>
             <Link
               to="/contact"
@@ -106,6 +113,13 @@ const Navbar = () => {
             >
               <Heart className="h-4 w-4 mr-2" />
               <span>Get Involved</span>
+            </Link>
+            <Link
+              to="/work-in-action"
+              className="text-gray-700 hover:text-primary block px-3 py-2 rounded-md text-base font-medium flex items-center"
+            >
+              <Construction className="h-4 w-4 mr-2" />
+              <span>Work In Action</span>
             </Link>
             <Link
               to="/contact"
