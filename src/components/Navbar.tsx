@@ -42,7 +42,7 @@ const Navbar = () => {
               className="text-gray-700 hover:text-primary flex items-center"
             >
               <Users className="h-4 w-4 mr-1" />
-              <span>Our Vision</span>
+              <span>About Us</span>
             </Link>
             <Link
               to="/get-involved"
