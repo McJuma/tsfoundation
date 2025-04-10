@@ -56,14 +56,7 @@ const Slideshow = ({
             backgroundImage: `url(${image})`,
             filter: "brightness(0.4)",
           }}
-        >
-          {/* Text overlay */}
-          <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-8">
-            <h2 className="text-white text-3xl md:text-4xl lg:text-5xl font-bold mb-4 max-w-3xl">
-              {texts[index] || ""}
-            </h2>
-          </div>
-        </div>
+        />
       ))}
 
       {/* Navigation controls */}
