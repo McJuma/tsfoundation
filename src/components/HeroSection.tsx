@@ -60,6 +60,11 @@ const HeroSection = ({
               Learn More
             </Button>
           </div>
+          <div className="mt-8">
+            <p className="text-xl md:text-2xl mb-8 max-w-2xl mx-auto drop-shadow-md">
+              {`Empowering Orphans for ${new Date().getFullYear() - 2023} year(s)`}
+            </p>
+          </div>
         </motion.div>
       </div>
     </div>
