@@ -48,6 +48,7 @@ const DonatePage = () => {
 
   // Function to check transaction status
   const checkStatus = async (checkoutRequestID: string) => {
+    console.log("Checking transaction status for ID:", checkoutRequestID);
     try {
       const statusResponse = await checkTransactionStatus(checkoutRequestID);
 
@@ -168,11 +169,21 @@ const DonatePage = () => {
         setIsLoading(true);
         setTransactionStatus("pending");
 
+        // Reset status check count
+        setStatusCheckCount(0);
+
         // Show initial toast for payment initiation
         toast({
           title: "Initiating payment",
           description: "Connecting to M-Pesa, please wait...",
         });
+
+        console.log(
+          "Initiating M-Pesa payment for phone:",
+          phoneNumber,
+          "amount:",
+          numAmount,
+        );
 
         const response = await initiateSTKPush(
           phoneNumber,
@@ -180,7 +191,9 @@ const DonatePage = () => {
           "TashaSasha Donation",
         );
 
-        if (response.ResponseCode === "0") {
+        console.log("M-Pesa API response:", response);
+
+        if (response && response.ResponseCode === "0") {
           // Payment initiated successfully
           setTransactionId(response.CheckoutRequestID);
           toast({

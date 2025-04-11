@@ -17,6 +17,9 @@ const BASE_URL = "https://sandbox.safaricom.co.ke";
 const TOKEN_URL = `${BASE_URL}/oauth/v1/generate?grant_type=client_credentials`;
 const STK_PUSH_URL = `${BASE_URL}/mpesa/stkpush/v1/processrequest`;
 
+// Add CORS proxy to handle cross-origin requests
+const CORS_PROXY = "https://cors-anywhere.herokuapp.com/";
+
 /**
  * Generate the authentication token for M-Pesa API
  * @returns Promise with the auth token
@@ -24,14 +27,16 @@ const STK_PUSH_URL = `${BASE_URL}/mpesa/stkpush/v1/processrequest`;
 async function getAuthToken(): Promise<string> {
   try {
     const auth = btoa(`${CONSUMER_KEY}:${CONSUMER_SECRET}`);
-    const response = await fetch(TOKEN_URL, {
+    const response = await fetch(CORS_PROXY + TOKEN_URL, {
       method: "GET",
       headers: {
         Authorization: `Basic ${auth}`,
+        Origin: "https://tashasashafoundation.org",
       },
     });
 
     const data = await response.json();
+    console.log("Auth token response:", data);
     return data.access_token;
   } catch (error) {
     console.error("Error getting auth token:", error);
@@ -77,9 +82,17 @@ export async function initiateSTKPush(
   amount: number,
   reference: string = "TashaSasha Donation",
 ) {
+  console.log("Starting STK push with params:", {
+    phoneNumber,
+    amount,
+    reference,
+  });
   try {
     // Format phone number (remove leading 0 if present and ensure it starts with 254)
-    let formattedPhone = phoneNumber;
+    let formattedPhone = phoneNumber.trim().replace(/[\s-]/g, "");
+    if (formattedPhone.startsWith("+")) {
+      formattedPhone = formattedPhone.substring(1);
+    }
     if (formattedPhone.startsWith("0")) {
       formattedPhone = `254${formattedPhone.substring(1)}`;
     }
@@ -87,15 +100,18 @@ export async function initiateSTKPush(
       formattedPhone = `254${formattedPhone}`;
     }
 
+    console.log("Formatted phone number:", formattedPhone);
+
     const timestamp = getTimestamp();
     const password = generatePassword(timestamp);
     const token = await getAuthToken();
 
-    const response = await fetch(STK_PUSH_URL, {
+    const response = await fetch(CORS_PROXY + STK_PUSH_URL, {
       method: "POST",
       headers: {
         Authorization: `Bearer ${token}`,
         "Content-Type": "application/json",
+        Origin: "https://tashasashafoundation.org",
       },
       body: JSON.stringify({
         BusinessShortCode: BUSINESS_SHORT_CODE,
@@ -113,6 +129,7 @@ export async function initiateSTKPush(
     });
 
     const data = await response.json();
+    console.log("API response data:", data);
     return data;
   } catch (error) {
     console.error("Error initiating STK push:", error);
@@ -131,21 +148,26 @@ export async function checkTransactionStatus(checkoutRequestID: string) {
     const timestamp = getTimestamp();
     const password = generatePassword(timestamp);
 
-    const response = await fetch(`${BASE_URL}/mpesa/stkpushquery/v1/query`, {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
+    const response = await fetch(
+      CORS_PROXY + `${BASE_URL}/mpesa/stkpushquery/v1/query`,
+      {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+          Origin: "https://tashasashafoundation.org",
+        },
+        body: JSON.stringify({
+          BusinessShortCode: BUSINESS_SHORT_CODE,
+          Password: password,
+          Timestamp: timestamp,
+          CheckoutRequestID: checkoutRequestID,
+        }),
       },
-      body: JSON.stringify({
-        BusinessShortCode: BUSINESS_SHORT_CODE,
-        Password: password,
-        Timestamp: timestamp,
-        CheckoutRequestID: checkoutRequestID,
-      }),
-    });
+    );
 
     const data = await response.json();
+    console.log("Transaction status response:", data);
     return data;
   } catch (error) {
     console.error("Error checking transaction status:", error);
