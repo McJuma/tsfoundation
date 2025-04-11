@@ -206,7 +206,7 @@ const DonatePage = () => {
           // This gives the user time to enter their PIN
           setTimeout(() => {
             // Check status every 10 seconds
-            const interval = setInterval(() => {
+            const interval = window.setInterval(() => {
               checkStatus(response.CheckoutRequestID);
             }, 10000);
 
@@ -281,6 +281,7 @@ const DonatePage = () => {
                       value={amount}
                       onChange={(e) => setAmount(e.target.value)}
                       min="100"
+                      max="10000"
                       placeholder="Enter amount in KES"
                       required
                       disabled={
