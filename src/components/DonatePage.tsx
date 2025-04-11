@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -13,17 +13,226 @@ import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Separator } from "@/components/ui/separator";
-import { BarChart, DollarSign, PieChart, FileText } from "lucide-react";
+import {
+  BarChart,
+  DollarSign,
+  PieChart,
+  FileText,
+  Loader2,
+  CheckCircle,
+  AlertCircle,
+  Clock,
+} from "lucide-react";
+import {
+  initiateSTKPush,
+  checkTransactionStatus,
+} from "@/services/mpesaService";
+import { useToast } from "@/components/ui/use-toast";
+import { ToastAction } from "@/components/ui/toast";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 
 const DonatePage = () => {
   const [paymentMethod, setPaymentMethod] = useState<string>("mpesa");
   const [amount, setAmount] = useState<string>("1000");
   const [phoneNumber, setPhoneNumber] = useState<string>("");
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [transactionId, setTransactionId] = useState<string>("");
+  const [transactionStatus, setTransactionStatus] = useState<
+    "pending" | "completed" | "failed" | null
+  >(null);
+  const [statusCheckInterval, setStatusCheckInterval] = useState<number | null>(
+    null,
+  );
+  const [statusCheckCount, setStatusCheckCount] = useState<number>(0);
+  const { toast } = useToast();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  // Function to check transaction status
+  const checkStatus = async (checkoutRequestID: string) => {
+    try {
+      const statusResponse = await checkTransactionStatus(checkoutRequestID);
+
+      // Check if we've reached the maximum number of status checks (5 minutes)
+      if (statusCheckCount >= 30) {
+        clearInterval(statusCheckInterval as number);
+        setStatusCheckInterval(null);
+        setTransactionStatus("pending");
+        toast({
+          title: "Payment status unknown",
+          description:
+            "We couldn't confirm your payment status. If you completed the payment, please contact support.",
+          variant: "destructive",
+        });
+        return;
+      }
+
+      // Increment the status check count
+      setStatusCheckCount((prev) => prev + 1);
+
+      // Process the status response
+      if (statusResponse.ResultCode === "0") {
+        // Payment successful
+        clearInterval(statusCheckInterval as number);
+        setStatusCheckInterval(null);
+        setTransactionStatus("completed");
+        toast({
+          title: "Payment successful",
+          description: "Thank you for your donation to TashaSasha Foundation!",
+        });
+      } else if (statusResponse.ResultCode === "1032") {
+        // Transaction is still being processed, continue checking
+        // This is the code for "Request cancelled by user"
+        clearInterval(statusCheckInterval as number);
+        setStatusCheckInterval(null);
+        setTransactionStatus("failed");
+        toast({
+          variant: "destructive",
+          title: "Payment cancelled",
+          description: "You cancelled the M-Pesa payment request.",
+        });
+      } else if (statusResponse.errorCode === "500.001.1001") {
+        // This error means the transaction is still being processed
+        // Continue checking
+      } else {
+        // Other error codes indicate failure
+        clearInterval(statusCheckInterval as number);
+        setStatusCheckInterval(null);
+        setTransactionStatus("failed");
+        toast({
+          variant: "destructive",
+          title: "Payment failed",
+          description:
+            statusResponse.ResultDesc ||
+            "There was an error processing your payment.",
+        });
+      }
+    } catch (error) {
+      console.error("Error checking transaction status:", error);
+      // Don't clear the interval on network errors, keep trying
+    }
+  };
+
+  // Clear interval when component unmounts
+  useEffect(() => {
+    return () => {
+      if (statusCheckInterval) {
+        clearInterval(statusCheckInterval);
+      }
+    };
+  }, [statusCheckInterval]);
+
+  // Reset transaction status when payment method changes
+  useEffect(() => {
+    setTransactionStatus(null);
+    setTransactionId("");
+    if (statusCheckInterval) {
+      clearInterval(statusCheckInterval);
+      setStatusCheckInterval(null);
+    }
+  }, [paymentMethod]);
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle donation submission logic here
-    alert(`Thank you for your donation of KES ${amount} via ${paymentMethod}`);
+
+    // Reset previous transaction data
+    setTransactionStatus(null);
+    setTransactionId("");
+    if (statusCheckInterval) {
+      clearInterval(statusCheckInterval);
+      setStatusCheckInterval(null);
+    }
+
+    if (paymentMethod === "mpesa") {
+      // Validate phone number
+      if (!phoneNumber) {
+        toast({
+          variant: "destructive",
+          title: "Phone number required",
+          description:
+            "Please enter your M-Pesa phone number to proceed with the donation.",
+        });
+        return;
+      }
+
+      // Validate amount
+      const numAmount = parseInt(amount, 10);
+      if (isNaN(numAmount) || numAmount < 10) {
+        toast({
+          variant: "destructive",
+          title: "Invalid amount",
+          description: "Please enter a valid amount of at least 10 KES.",
+        });
+        return;
+      }
+
+      try {
+        setIsLoading(true);
+        setTransactionStatus("pending");
+
+        // Show initial toast for payment initiation
+        toast({
+          title: "Initiating payment",
+          description: "Connecting to M-Pesa, please wait...",
+        });
+
+        const response = await initiateSTKPush(
+          phoneNumber,
+          numAmount,
+          "TashaSasha Donation",
+        );
+
+        if (response.ResponseCode === "0") {
+          // Payment initiated successfully
+          setTransactionId(response.CheckoutRequestID);
+          toast({
+            title: "M-Pesa payment initiated",
+            description:
+              "Please check your phone and enter your M-Pesa PIN to complete the donation.",
+          });
+
+          // Start checking transaction status after 10 seconds
+          // This gives the user time to enter their PIN
+          setTimeout(() => {
+            // Check status every 10 seconds
+            const interval = setInterval(() => {
+              checkStatus(response.CheckoutRequestID);
+            }, 10000);
+
+            setStatusCheckInterval(interval);
+            // Do an immediate check
+            checkStatus(response.CheckoutRequestID);
+          }, 10000);
+        } else {
+          // Payment initiation failed
+          setTransactionStatus("failed");
+          toast({
+            variant: "destructive",
+            title: "Payment initiation failed",
+            description:
+              response.ResponseDescription ||
+              "There was an error processing your payment. Please try again.",
+            action: <ToastAction altText="Try again">Try again</ToastAction>,
+          });
+        }
+      } catch (error) {
+        console.error("Payment error:", error);
+        setTransactionStatus("failed");
+        toast({
+          variant: "destructive",
+          title: "Payment failed",
+          description:
+            "There was an error connecting to M-Pesa. Please check your internet connection and try again.",
+          action: <ToastAction altText="Try again">Try again</ToastAction>,
+        });
+      } finally {
+        setIsLoading(false);
+      }
+    } else {
+      // For other payment methods, just show a thank you message
+      toast({
+        title: "Thank you for your donation",
+        description: `Your donation of KES ${amount} via ${paymentMethod} is appreciated.`,
+      });
+    }
   };
 
   return (
@@ -61,7 +270,9 @@ const DonatePage = () => {
                       min="100"
                       placeholder="Enter amount in KES"
                       required
-                      disabled={paymentMethod === "paypal" || paymentMethod === "bank"}
+                      disabled={
+                        paymentMethod === "paypal" || paymentMethod === "bank"
+                      }
                     />
                   </div>
                 </div>
@@ -104,19 +315,20 @@ const DonatePage = () => {
                         value={phoneNumber}
                         onChange={(e) => setPhoneNumber(e.target.value)}
                         placeholder="e.g., 07XXXXXXXX"
+                        pattern="^(\+254|0|254)?(7[0-9]{8})$"
+                        title="Please enter a valid Kenyan phone number"
                         required
                       />
                     </div>
                     <p className="mt-1 text-xs text-black-500">
-                      Enter the phone number registered with M-Pesa. You will receive a prompt on your phone to enter your M-Pesa PIN
+                      Enter the phone number registered with M-Pesa. You will
+                      receive a prompt on your phone to enter your M-Pesa PIN
                     </p>
                   </div>
                 )}
 
-
                 {paymentMethod === "bank" && (
                   <div className="mb-6">
-                    
                     <label htmlFor="bank_details">Bank Details</label>
                     <div className="mt-2">
                       {/* show bank details when bank transfer is selected */}
@@ -132,7 +344,6 @@ const DonatePage = () => {
                     </div>
                   </div>
                 )}
-                
 
                 {paymentMethod === "paypal" && (
                   <div className="mb-6">
@@ -141,16 +352,78 @@ const DonatePage = () => {
                       Send your donations to jumamark33@gmail.com
                     </div>
                   </div>
-                )
+                )}
 
-                }
+                {/* Transaction Status Alert */}
+                {transactionStatus && (
+                  <div className="mb-4">
+                    {transactionStatus === "pending" && (
+                      <Alert className="bg-yellow-50 border-yellow-200">
+                        <Clock className="h-4 w-4 text-yellow-600" />
+                        <AlertTitle className="text-yellow-800">
+                          Payment in progress
+                        </AlertTitle>
+                        <AlertDescription className="text-yellow-700">
+                          Please check your phone and enter your M-Pesa PIN to
+                          complete the transaction.
+                        </AlertDescription>
+                      </Alert>
+                    )}
+                    {transactionStatus === "completed" && (
+                      <Alert className="bg-green-50 border-green-200">
+                        <CheckCircle className="h-4 w-4 text-green-600" />
+                        <AlertTitle className="text-green-800">
+                          Payment successful
+                        </AlertTitle>
+                        <AlertDescription className="text-green-700">
+                          Thank you for your donation to TashaSasha Foundation!
+                        </AlertDescription>
+                      </Alert>
+                    )}
+                    {transactionStatus === "failed" && (
+                      <Alert className="bg-red-50 border-red-200">
+                        <AlertCircle className="h-4 w-4 text-red-600" />
+                        <AlertTitle className="text-red-800">
+                          Payment failed
+                        </AlertTitle>
+                        <AlertDescription className="text-red-700">
+                          There was an issue with your payment. Please try again
+                          or use a different payment method.
+                        </AlertDescription>
+                      </Alert>
+                    )}
+                  </div>
+                )}
 
                 <Button
                   type="submit"
                   className="w-full"
-                  disabled={paymentMethod === "paypal" || paymentMethod === "bank"}
+                  disabled={
+                    paymentMethod === "paypal" ||
+                    paymentMethod === "bank" ||
+                    isLoading ||
+                    transactionStatus === "pending" ||
+                    transactionStatus === "completed"
+                  }
                 >
-                  Complete Donation
+                  {isLoading ? (
+                    <>
+                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                      Processing...
+                    </>
+                  ) : transactionStatus === "completed" ? (
+                    <>
+                      <CheckCircle className="mr-2 h-4 w-4" />
+                      Donation Complete
+                    </>
+                  ) : transactionStatus === "pending" ? (
+                    <>
+                      <Clock className="mr-2 h-4 w-4" />
+                      Awaiting Confirmation
+                    </>
+                  ) : (
+                    "Complete Donation"
+                  )}
                 </Button>
               </form>
             </CardContent>
