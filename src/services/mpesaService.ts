@@ -114,13 +114,13 @@ export async function initiateSTKPush(
         Origin: "https://tashasashafoundation.org",
       },
       body: JSON.stringify({
-        BusinessShortCode: BUSINESS_SHORT_CODE,
+        BusinessShortCode: 174379,
         Password: password,
         Timestamp: timestamp,
         TransactionType: "CustomerPayBillOnline",
         Amount: amount,
         PartyA: formattedPhone,
-        PartyB: BUSINESS_SHORT_CODE,
+        PartyB: "254758109581",
         PhoneNumber: formattedPhone,
         CallBackURL: "https://tashasashafoundation.org/api/mpesa/callback", // This would be replaced with your actual callback URL in production
         AccountReference: reference,
