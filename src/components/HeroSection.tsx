@@ -52,12 +52,12 @@ const HeroSection = ({
               Donate Now
             </Button>
             <Button
-              onClick={() => (window.location.href = "/get-involved")}
+              onClick={() => (window.location.href = "/about")}
               size="lg"
               variant="outline"
               className="text-lg px-8 py-6 bg-transparent border-white hover:bg-white hover:text-black transition-colors"
             >
-              Get Involved
+              Learn More
             </Button>
           </div>
         </motion.div>
