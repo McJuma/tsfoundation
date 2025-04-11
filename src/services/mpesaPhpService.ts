@@ -13,7 +13,7 @@
 export async function initiateSTKPush(
   phoneNumber: string,
   amount: number,
-  reference: string = "TashaSasha Donation",
+  reference: string = "TashaSasha Foundation",
 ) {
   console.log("Starting STK push with params:", {
     phoneNumber,

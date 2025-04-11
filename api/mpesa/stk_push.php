@@ -7,6 +7,7 @@
  */
 
 // Set headers to allow cross-origin requests and specify JSON content type
+date_default_timezone_set('Africa/Nairobi');
 header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json");
 header("Access-Control-Allow-Methods: POST");
@@ -39,7 +40,7 @@ if (!isset($requestData['phoneNumber']) || !isset($requestData['amount']) || !is
 // Extract request parameters
 $phoneNumber = $requestData['phoneNumber'];
 $amount = $requestData['amount'];
-$reference = $requestData['reference'] ?? 'TashaSasha Donation';
+$reference = $requestData['reference'] ?? 'TashaSasha Foundation';
 
 // M-Pesa API credentials
 $consumerKey = 'G8TAWATIG5154hOQhNigPbwiUMeGahpWzfFW0auOh4e0krUM';
