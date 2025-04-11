@@ -5,12 +5,10 @@
 
 // M-Pesa API credentials
 const CONSUMER_KEY = "G8TAWATIG5154hOQhNigPbwiUMeGahpWzfFW0auOh4e0krUM";
-const CONSUMER_SECRET =
-  "98HUqbQlEoYffmKPNJn2T3nNDbJco1ASgWGXbq98VfNYKYqV9eZeWMiA7Y162sqC";
-const BUSINESS_SHORT_CODE = "174379";
-const PASSKEY =
-  "bfb279f9aa9bdbcf158e97dd71a467cd2e0c893059b10f78e6b72ada1ed2c919";
-const PHONE_NUMBER = "254758109581";
+const CONSUMER_SECRET = "98HUqbQlEoYffmKPNJn2T3nNDbJco1ASgWGXbq98VfNYKYqV9eZeWMiA7Y162sqC";
+const BUSINESS_SHORT_CODE = 174379; // TashaSasha Foundation's Paybill number
+const PASSKEY = "bfb279f9aa9bdbcf158e97dd71a467cd2e0c893059b10f78e6b72ada1ed2c919";
+// const PHONE_NUMBER = "254758109581";
 
 // M-Pesa API endpoints
 const BASE_URL = "https://sandbox.safaricom.co.ke";
@@ -111,7 +109,7 @@ export async function initiateSTKPush(
       headers: {
         Authorization: `Bearer ${token}`,
         "Content-Type": "application/json",
-        Origin: "https://tashasashafoundation.org",
+        // Origin: "https://tashasashafoundation.org",
       },
       body: JSON.stringify({
         BusinessShortCode: 174379,
@@ -120,9 +118,9 @@ export async function initiateSTKPush(
         TransactionType: "CustomerPayBillOnline",
         Amount: amount,
         PartyA: formattedPhone,
-        PartyB: "254758109581",
+        PartyB: BUSINESS_SHORT_CODE,
         PhoneNumber: formattedPhone,
-        CallBackURL: "https://tashasashafoundation.org/api/mpesa/callback", // This would be replaced with your actual callback URL in production
+        CallBackURL: "https://ba9e-169-150-218-130.ngrok-free.app/Mpesa-Daraja-Api/callback.php", // This would be replaced with your actual callback URL in production
         AccountReference: reference,
         TransactionDesc: "Donation to TashaSasha Foundation",
       }),
